@@ -32,6 +32,25 @@
         </div>
     </div>
 
+    <!-- نمایشگر تمام‌صفحهٔ تصاویر پرونده‌ها -->
+    <div id="image-modal" class="image-modal" onclick="if(event.target === this) closeImageModal()">
+        <button class="image-modal-close" type="button" aria-label="بستن تصویر" onclick="closeImageModal()">×</button>
+        <img id="expanded-image" src="" alt="">
+    </div>
+
+    <div id="access-granted-screen" aria-live="polite" aria-hidden="true">
+        <div id="access-terminal" class="access-terminal">
+            <div class="access-terminal-header">
+                <span>UMBRELLA // SECURE TERMINAL</span>
+                <span class="terminal-status">● ONLINE</span>
+            </div>
+            <div id="access-terminal-log" class="access-terminal-log"></div>
+        </div>
+        <div id="access-confirmation" class="access-confirmation" aria-hidden="true">
+            <img src="images/Umbrella_Corporation_logo.svg.webp" alt="Umbrella Corporation">
+            <p>دسترسی داده شد</p>
+        </div>
+    </div>
 
     <div id="login-screen">
         <div class="login-box">
@@ -79,6 +98,7 @@
                 <div class="sub-item" data-original-text="بری برتون (Barry Burton)" onclick="loadProfile('بری')">بری برتون (Barry Burton)</div>
                 <div class="sub-item" data-original-text="اوزول ای. اسپنسر (Ozwell E. Spencer)" onclick="loadProfile('اسپنسر')">اوزول ای. اسپنسر (Ozwell E. Spencer)</div>
                 <div class="sub-item" data-original-text="هانک (HUNK)" onclick="loadProfile('هانک')">هانک (HUNK)</div>
+                <div class="sub-item" data-original-text="کارلوس اولیویرا (Carlos Oliveira)" onclick="loadProfile('کارلوس')">کارلوس اولیویرا (Carlos Oliveira)</div>
             </div>
 
             <div class="nav-btn" onclick="toggleMenu('m3')">🧬 پروژه‌های تحقیقاتی</div>
@@ -86,14 +106,33 @@
                 <div class="sub-item" data-original-text="NE-α Project" onclick="loadProfile('nea')">NE-α Project</div>
                 <div class="sub-item" data-original-text="ویروس لاس پلاگاس (Las Plagas)" onclick="loadProfile('لاس پلاگاس')">ویروس لاس پلاگاس (Las Plagas)</div>
             </div>
+
+            <div class="nav-btn" onclick="toggleMenu('m4')">📍 مکان‌های آلوده</div>
+            <div id="m4" class="submenu">
+                <div class="sub-item" data-original-text="عمارت اسپنسر (Spencer Mansion)" onclick="loadProfile('عمارت اسپنسر')">عمارت اسپنسر (Spencer Mansion)</div>
+            </div>
             <div class="nav-btn" onclick="showContact()">📞 ارتباط با سازنده</div>
         </div>
 
 
         <div id="main-content">
+            <div class="system-status" role="status" aria-label="وضعیت سامانه">
+                <span class="system-status-item"><i class="status-light"></i> سرور مرکزی: آنلاین</span>
+                <span class="system-status-item">سطح هشدار: <strong>قرمز</strong></span>
+                <span id="database-clock" class="system-status-item">ساعت سامانه: --:--:--</span>
+            </div>
             <div id="display-area">
-                <h1 class="glitch-title" data-text="سیستم مرکزی آمبرلا" style="color: var(--main-red);">سیستم مرکزی آمبرلا</h1>
-                <p>هشدار امنیتی: این پروژه هیچ‌گونه نقص فنی یا باگی نداره؛ صرفاً دسترسی‌ها در حال حاضر محدود است. شرکت آمبرلا هنوز مجوز دسترسی کامل به فایل‌های محرمانه رو صادر نکرده و ما مجبوریم با همین اطلاعاتِ قطره‌چکانی سر کنیم. به محض اینکه مامورهای ما در آزمایشگاه‌های زیرزمینی به داده‌های جدید دست پیدا کنن و شرکت اجازه نشت اطلاعات رو بده، دیتابیس رو آپدیت می‌کنیم.</p>
+                <section class="welcome-panel">
+                    <p class="welcome-kicker">UMBRELLA // CLASSIFIED DATABASE</p>
+                    <h1 class="glitch-title" data-text="سیستم مرکزی آمبرلا">سیستم مرکزی آمبرلا</h1>
+                    <p class="welcome-copy">دسترسی محدود برقرار است. پرونده‌های طبقه‌بندی‌شدهٔ زیستی، پرسنل، پروژه‌ها و مکان‌های آلوده را از آرشیو انتخاب کنید.</p>
+                    <div class="archive-stats" aria-label="آمار آرشیو">
+                        <article class="archive-stat"><strong id="stat-bio">۰</strong><span>موجود بیولوژیکی</span></article>
+                        <article class="archive-stat"><strong id="stat-personnel">۰</strong><span>پرسنل و سوژه</span></article>
+                        <article class="archive-stat"><strong id="stat-projects">۰</strong><span>پروژه تحقیقاتی</span></article>
+                        <article class="archive-stat"><strong id="stat-locations">۰</strong><span>مکان آلوده</span></article>
+                    </div>
+                </section>
             </div>
         </div>
     </div>

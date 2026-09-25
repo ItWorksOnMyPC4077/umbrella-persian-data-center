@@ -378,10 +378,72 @@ const profiles = {
             survivalTips: "از درگیری طولانی دوری کن، مسیر خروج را حفظ کن و او را از فاصلهٔ امن زیر نظر بگیر.",
             affiliation: "Umbrella Security Service (U.S.S.)",
             bio: `هانک، معروف به «مستر دث»، یکی از مرموزترین و کارآمدترین مأموران واحد امنیتی آمبرلا (U.S.S.) است. هویت واقعی او فاش نشده و تقریباً همیشه با ماسک و تجهیزات کامل فعالیت می‌کند. او در مأموریت‌های بازیابی نمونه‌های ویروسی و پاک‌سازی شواهد، بارها از موقعیت‌هایی جان سالم به در برده که برای دیگر نیروها غیرممکن بوده است.<br><br>هانک به‌خاطر خونسردی، اجرای دقیق دستورها و توانایی بقا در میدان‌های آلوده شهرت دارد. عملیات Raccoon City و مأموریت‌های استخراج نمونه، نام او را به نمادی از موفقیت بی‌رحمانه در عملیات‌های محرمانه تبدیل کرد.`
+        },
+        "کارلوس": {
+            title: "Carlos Oliveira",
+            imgs: ["images/carlos.png"],
+            role: "نیروی عملیاتی U.B.C.S. / بازماندهٔ راکون‌سیتی",
+            height: "حدود 182 سانتی‌متر",
+            ability: "تیراندازی، درگیری نزدیک، امدادرسانی میدانی و سازگاری در شرایط بحرانی",
+            danger: "بالا",
+            threatDetails: "آموزش نظامی، واکنش سریع و تجربهٔ مواجهه با آلودگی گسترده، کارلوس را به نیرویی مؤثر در عملیات‌های پرخطر تبدیل می‌کند.",
+            weakness: "وابستگی به مهمات و تجهیزات میدانی و آسیب‌پذیری انسانی در برابر B.O.Wهای قدرتمند",
+            origin: "U.B.C.S. / حادثهٔ Raccoon City",
+            virusType: "N/A",
+            firstAppearance: "Resident Evil 3",
+            combatStyle: "تهاجمی و متحرک؛ استفاده از سلاح گرم، پوشش‌دهی و کمک به غیرنظامیان",
+            status: "Active",
+            notableTraits: "شجاعت، شوخ‌طبعی، وفاداری و تصمیم‌گیری سریع زیر فشار",
+            survivalTips: "مهمات را مدیریت کن، مسیر خروج را باز نگه دار و در محیط‌های بسته از پوشش استفاده کن.",
+            affiliation: "U.B.C.S. / Independent",
+            bio: `کارلوس اولیویرا یکی از اعضای واحد U.B.C.S. بود که برای عملیات تخلیه و مقابله با بحران راکون‌سیتی اعزام شد. او خیلی زود متوجه شد که مأموریت شرکت Umbrella با آنچه به نیروها گفته شده بود تفاوت دارد و برای نجات بازماندگان، از جمله جیل ولنتاین، وارد نبردی جدی با آلودگی و سلاح‌های زیستی شد.<br><br>کارلوس با وجود سابقهٔ نظامی و مهارت رزمی، انسانی همدل و مسئولیت‌پذیر است. توانایی او در مبارزه، محافظت از دیگران و حفظ امید در موقعیت‌های بحرانی، او را به یکی از بازماندگان قابل‌اعتماد پروندهٔ راکون‌سیتی تبدیل کرده است.`
+        },
+        "عمارت اسپنسر": {
+            title: "Spencer Mansion",
+            imgs: ["images/Spencer_Estate.webp"],
+            infoRows: [
+                { label: "نوع پرونده:", value: "مکان آلوده / آزمایشگاه مخفی Umbrella" },
+                { label: "موقعیت:", value: "کوهستان آرکلی، حومهٔ راکون‌سیتی" },
+                { label: "سطح تهدید:", value: "فوق‌العاده بالا", danger: true },
+                { label: "عامل آلودگی:", value: "T-Virus و آزمایش‌های اولیهٔ Umbrella" },
+                { label: "تهدیدهای اصلی:", value: "زامبی‌ها، سگ‌های آلوده، هانترها، عنکبوت‌های غول‌پیکر و تایرنت T-002" },
+                { label: "مناطق حساس:", value: "سالن اصلی، اتاق نقاشی، باغ، تونل زیرزمینی و آزمایشگاه مخفی" },
+                { label: "اولین حضور:", value: "Resident Evil" },
+                { label: "توصیه بقا:", value: "مهمات را حفظ کن، نقشه و کلیدها را بررسی کن و در راهروهای باریک برای حملهٔ غافلگیرانه آماده باش." }
+            ],
+            bio: `عمارت اسپنسر یک اقامتگاه اشرافی در کوهستان آرکلی بود که در زیر آن، تأسیسات مخفی پژوهشی Umbrella قرار داشت. این مکان یکی از نخستین مراکز آزمایش T-Virus به شمار می‌رود و پس از نشت آلودگی، به صحنهٔ پروندهٔ معروف «حادثهٔ عمارت» تبدیل شد.<br><br>ظاهر آرام و مجلل عمارت، شبکه‌ای از اتاق‌های مخفی، معماها، راهروهای تنگ و آزمایشگاه‌های زیرزمینی را پنهان می‌کند. برای بازماندگان، عمارت اسپنسر فقط یک ساختمان نیست؛ نقطهٔ آغاز افشای جنایت‌های Umbrella است.`
         }
     };
 
     let typingRun = 0;
+
+    function updateSystemClock() {
+        const clock = document.getElementById("database-clock");
+        if (!clock) return;
+
+        const time = new Intl.DateTimeFormat("fa-IR", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        }).format(new Date());
+        clock.textContent = "ساعت سامانه: " + time;
+    }
+
+    function updateArchiveStats() {
+        const categoryCounts = [
+            ["stat-bio", "m1"],
+            ["stat-personnel", "m2"],
+            ["stat-projects", "m3"],
+            ["stat-locations", "m4"]
+        ];
+
+        categoryCounts.forEach(([statId, menuId]) => {
+            const stat = document.getElementById(statId);
+            const menu = document.getElementById(menuId);
+            if (!stat || !menu) return;
+            stat.textContent = menu.querySelectorAll(".sub-item").length.toLocaleString("fa-IR");
+        });
+    }
 
     function cancelTyping() {
         typingRun++;
@@ -449,13 +511,68 @@ const profiles = {
         requestAnimationFrame(render);
     }
 
+    let accessGrantedTimers = [];
+
+    function clearAccessGrantedTimers() {
+        accessGrantedTimers.forEach(timer => clearTimeout(timer));
+        accessGrantedTimers = [];
+    }
+
+    function addTerminalLine(message) {
+        const log = document.getElementById("access-terminal-log");
+        const line = document.createElement("div");
+        line.className = "access-terminal-line";
+        line.textContent = message;
+        log.appendChild(line);
+    }
+
     function checkAccess() {
-        if (document.getElementById("access-key").value === "umbrella") {
+        const accessKey = document.getElementById("access-key");
+        const loginError = document.getElementById("login-error");
+
+        if (accessKey.value !== "umbrella") {
+            loginError.innerText = "خطا در دسترسی!";
+            return;
+        }
+
+        const accessScreen = document.getElementById("access-granted-screen");
+        const terminal = document.getElementById("access-terminal");
+        const terminalLog = document.getElementById("access-terminal-log");
+        const confirmation = document.getElementById("access-confirmation");
+        const loadingSteps = [
+            "اتصال به سرور مرکزی Umbrella برقرار شد",
+            "در حال بارگذاری اطلاعات طبقه‌بندی‌شده...",
+            "بررسی سطح مجوز امنیتی...",
+            "رمزگشایی پرونده‌های محرمانه...",
+            "تطبیق کد دسترسی کاربر...",
+            "مجوز سطح قرمز تأیید شد"
+        ];
+
+        clearAccessGrantedTimers();
+        loginError.innerText = "";
+        terminalLog.innerHTML = "";
+        terminal.classList.remove("is-hidden");
+        confirmation.classList.remove("is-visible");
+        confirmation.setAttribute("aria-hidden", "true");
+        accessScreen.classList.add("is-visible");
+        accessScreen.setAttribute("aria-hidden", "false");
+
+        loadingSteps.forEach((step, index) => {
+            accessGrantedTimers.push(setTimeout(() => addTerminalLine(step), index * 500));
+        });
+
+        accessGrantedTimers.push(setTimeout(() => {
+            terminal.classList.add("is-hidden");
+            confirmation.classList.add("is-visible");
+            confirmation.setAttribute("aria-hidden", "false");
+        }, 3000));
+
+        accessGrantedTimers.push(setTimeout(() => {
+            accessScreen.classList.remove("is-visible");
+            accessScreen.setAttribute("aria-hidden", "true");
             document.getElementById("login-screen").style.display = "none";
             document.getElementById("dashboard").style.display = "flex";
-        } else {
-            document.getElementById("login-error").innerText = "خطا در دسترسی!";
-        }
+        }, 4200));
     }
 
     function toggleMenu(id) {
@@ -472,31 +589,65 @@ const profiles = {
             : `<div class="info-row"><span class="info-label">${label}</span>${value}</div>`;
     }
 
+    function openImageModal(source, altText) {
+        const modal = document.getElementById("image-modal");
+        const image = document.getElementById("expanded-image");
+        if (!modal || !image) return;
+
+        image.src = source;
+        image.alt = altText || "تصویر پرونده";
+        modal.style.display = "flex";
+        document.body.classList.add("modal-open");
+    }
+
+    function closeImageModal() {
+        const modal = document.getElementById("image-modal");
+        const image = document.getElementById("expanded-image");
+        if (!modal || !image) return;
+
+        modal.style.display = "none";
+        image.removeAttribute("src");
+        document.body.classList.remove("modal-open");
+    }
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") closeImageModal();
+    });
+
     function loadProfile(key) {
         const p = profiles[key];
         if (!p) return;
 
-        let imgHtml = p.imgs.map(i => `<img src="${i}" alt="${p.title}">`).join('');
+        const imgHtml = (p.imgs || [])
+            .map(i => `<img src="${i}" alt="${p.title}" loading="lazy" onclick="openImageModal(this.src, this.alt)">`)
+            .join('');
+        const defaultInfoRows = [
+            ["نقش:", p.role],
+            ["قد:", p.height],
+            ["قابلیت:", p.ability],
+            ["تهدید:", p.danger, true],
+            ["جزئیات سطح تهدید:", p.threatDetails],
+            ["نقطه ضعف:", p.weakness],
+            ["منشا:", p.origin],
+            ["نوع ویروس / جهش:", p.virusType],
+            ["اولین حضور:", p.firstAppearance],
+            ["سبک مبارزه:", p.combatStyle],
+            ["وضعیت:", p.status],
+            ["ویژگی‌های شاخص:", p.notableTraits],
+            ["وابستگی:", p.affiliation],
+            ["توصیه بقا:", p.survivalTips]
+        ];
+        const infoHtml = (p.infoRows
+            ? p.infoRows.map(row => createInfoRow(row.label, row.value, row.danger))
+            : defaultInfoRows.map(([label, value, danger]) => createInfoRow(label, value, danger))
+        ).join("");
 
         document.getElementById("display-area").innerHTML = `
             <div class="id-card">
                 <div class="id-photos">${imgHtml}</div>
                 <div class="id-details">
                     <h1 class="glitch-title">${p.title}</h1>
-                    ${createInfoRow("نقش:", p.role)}
-                    ${createInfoRow("قد:", p.height)}
-                    ${createInfoRow("قابلیت:", p.ability)}
-                    ${createInfoRow("تهدید:", p.danger, true)}
-                    ${createInfoRow("جزئیات سطح تهدید:", p.threatDetails)}
-                    ${createInfoRow("نقطه ضعف:", p.weakness)}
-                    ${createInfoRow("منشا:", p.origin)}
-                    ${createInfoRow("نوع ویروس / جهش:", p.virusType)}
-                    ${createInfoRow("اولین حضور:", p.firstAppearance)}
-                    ${createInfoRow("سبک مبارزه:", p.combatStyle)}
-                    ${createInfoRow("وضعیت:", p.status)}
-                    ${createInfoRow("ویژگی‌های شاخص:", p.notableTraits)}
-                    ${createInfoRow("وابستگی:", p.affiliation)}
-                    ${createInfoRow("توصیه بقا:", p.survivalTips)}
+                    ${infoHtml}
                     <div class="bio-text">${p.bio}</div>
                 </div>
             </div>
@@ -532,6 +683,10 @@ const profiles = {
             if (query !== "") menu.style.display = hasVisible ? "block" : "none";
         });
     }
+
+    updateArchiveStats();
+    updateSystemClock();
+    setInterval(updateSystemClock, 1000);
 
     function showContact() {
         cancelTyping();

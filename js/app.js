@@ -415,18 +415,92 @@ const profiles = {
         }
     };
 
+    let activeLanguage = "fa";
+    let activeProfileKey = null;
+    let currentView = "welcome";
     let typingRun = 0;
+
+    function getUiText(key) {
+        return window.uiTranslations[activeLanguage][key] || key;
+    }
+
+    function getProfileKeyFromItem(item) {
+        const match = (item.getAttribute("onclick") || "").match(/loadProfile\('([^']+)'\)/);
+        return match ? match[1] : null;
+    }
+
+    function updateProfileMenuLanguage() {
+        document.querySelectorAll(".sub-item").forEach(item => {
+            const key = getProfileKeyFromItem(item);
+            if (!key || !profiles[key]) return;
+
+            const englishProfile = window.englishProfiles[key];
+            const text = activeLanguage === "en"
+                ? (englishProfile && englishProfile.menuTitle) || profiles[key].title
+                : item.getAttribute("data-original-text");
+
+            item.setAttribute("data-current-text", text);
+            item.textContent = text;
+        });
+    }
+
+    function updateStaticLanguage() {
+        const root = document.documentElement;
+        root.lang = activeLanguage;
+        root.dir = activeLanguage === "en" ? "ltr" : "rtl";
+        document.body.classList.toggle("english-mode", activeLanguage === "en");
+
+        document.querySelectorAll("[data-i18n]").forEach(element => {
+            const text = getUiText(element.getAttribute("data-i18n"));
+            element.textContent = text;
+            if (element.classList.contains("glitch-title")) element.dataset.text = text;
+        });
+
+        document.querySelectorAll("[data-i18n-placeholder]").forEach(element => {
+            element.placeholder = getUiText(element.getAttribute("data-i18n-placeholder"));
+        });
+
+        document.querySelectorAll("[data-language-button]").forEach(button => {
+            button.classList.toggle("is-active", button.getAttribute("data-language-button") === activeLanguage);
+        });
+    }
+
+    function setLanguage(language) {
+        activeLanguage = language === "en" ? "en" : "fa";
+        try {
+            localStorage.setItem("umbrella-language", activeLanguage);
+        } catch (error) {
+            // Language switching remains available when local storage is unavailable.
+        }
+        document.getElementById("search-input").value = "";
+        updateStaticLanguage();
+        updateProfileMenuLanguage();
+        updateArchiveStats();
+        updateSystemClock();
+
+        if (currentView === "profile" && activeProfileKey) loadProfile(activeProfileKey);
+        if (currentView === "contact") showContact();
+    }
+
+    function getEnglishDanger(value) {
+        if (!value) return "";
+        if (value.includes("فوق")) return "EXTREME";
+        if (value.includes("بسیار")) return "VERY HIGH";
+        if (value.includes("بالا")) return "HIGH";
+        if (value.includes("متوسط")) return "MODERATE";
+        return value;
+    }
 
     function updateSystemClock() {
         const clock = document.getElementById("database-clock");
         if (!clock) return;
 
-        const time = new Intl.DateTimeFormat("fa-IR", {
+        const time = new Intl.DateTimeFormat(activeLanguage === "en" ? "en-US" : "fa-IR", {
             hour: "2-digit",
             minute: "2-digit",
             second: "2-digit"
         }).format(new Date());
-        clock.textContent = "ساعت سامانه: " + time;
+        clock.textContent = getUiText("clockLabel") + " " + time;
     }
 
     function updateArchiveStats() {
@@ -441,7 +515,7 @@ const profiles = {
             const stat = document.getElementById(statId);
             const menu = document.getElementById(menuId);
             if (!stat || !menu) return;
-            stat.textContent = menu.querySelectorAll(".sub-item").length.toLocaleString("fa-IR");
+            stat.textContent = menu.querySelectorAll(".sub-item").length.toLocaleString(activeLanguage === "en" ? "en-US" : "fa-IR");
         });
     }
 
@@ -531,7 +605,7 @@ const profiles = {
         const loginError = document.getElementById("login-error");
 
         if (accessKey.value !== "umbrella") {
-            loginError.innerText = "خطا در دسترسی!";
+            loginError.innerText = getUiText("accessError");
             return;
         }
 
@@ -539,14 +613,23 @@ const profiles = {
         const terminal = document.getElementById("access-terminal");
         const terminalLog = document.getElementById("access-terminal-log");
         const confirmation = document.getElementById("access-confirmation");
-        const loadingSteps = [
-            "اتصال به سرور مرکزی Umbrella برقرار شد",
-            "در حال بارگذاری اطلاعات طبقه‌بندی‌شده...",
-            "بررسی سطح مجوز امنیتی...",
-            "رمزگشایی پرونده‌های محرمانه...",
-            "تطبیق کد دسترسی کاربر...",
-            "مجوز سطح قرمز تأیید شد"
-        ];
+        const loadingSteps = activeLanguage === "en"
+            ? [
+                "Connection to Umbrella central server established",
+                "Loading classified information...",
+                "Checking security clearance...",
+                "Decrypting confidential files...",
+                "Verifying user access key...",
+                "Red-level clearance confirmed"
+            ]
+            : [
+                "اتصال به سرور مرکزی Umbrella برقرار شد",
+                "در حال بارگذاری اطلاعات طبقه‌بندی‌شده...",
+                "بررسی سطح مجوز امنیتی...",
+                "رمزگشایی پرونده‌های محرمانه...",
+                "تطبیق کد دسترسی کاربر...",
+                "مجوز سطح قرمز تأیید شد"
+            ];
 
         clearAccessGrantedTimers();
         loginError.innerText = "";
@@ -615,28 +698,42 @@ const profiles = {
     });
 
     function loadProfile(key) {
-        const p = profiles[key];
-        if (!p) return;
+        const baseProfile = profiles[key];
+        if (!baseProfile) return;
+
+        const englishProfile = window.englishProfiles[key] || {};
+        const p = activeLanguage === "en"
+            ? Object.assign({}, baseProfile, englishProfile)
+            : baseProfile;
+        activeProfileKey = key;
+        currentView = "profile";
 
         const imgHtml = (p.imgs || [])
             .map(i => `<img src="${i}" alt="${p.title}" loading="lazy" onclick="openImageModal(this.src, this.alt)">`)
             .join('');
-        const defaultInfoRows = [
-            ["نقش:", p.role],
-            ["قد:", p.height],
-            ["قابلیت:", p.ability],
-            ["تهدید:", p.danger, true],
-            ["جزئیات سطح تهدید:", p.threatDetails],
-            ["نقطه ضعف:", p.weakness],
-            ["منشا:", p.origin],
-            ["نوع ویروس / جهش:", p.virusType],
-            ["اولین حضور:", p.firstAppearance],
-            ["سبک مبارزه:", p.combatStyle],
-            ["وضعیت:", p.status],
-            ["ویژگی‌های شاخص:", p.notableTraits],
-            ["وابستگی:", p.affiliation],
-            ["توصیه بقا:", p.survivalTips]
-        ];
+        const defaultInfoRows = activeLanguage === "en"
+            ? [
+                ["Role:", p.role],
+                ["Threat level:", getEnglishDanger(baseProfile.danger), true],
+                ["Origin:", p.origin],
+                ["First appearance:", p.firstAppearance]
+            ]
+            : [
+                ["نقش:", p.role],
+                ["قد:", p.height],
+                ["قابلیت:", p.ability],
+                ["تهدید:", p.danger, true],
+                ["جزئیات سطح تهدید:", p.threatDetails],
+                ["نقطه ضعف:", p.weakness],
+                ["منشا:", p.origin],
+                ["نوع ویروس / جهش:", p.virusType],
+                ["اولین حضور:", p.firstAppearance],
+                ["سبک مبارزه:", p.combatStyle],
+                ["وضعیت:", p.status],
+                ["ویژگی‌های شاخص:", p.notableTraits],
+                ["وابستگی:", p.affiliation],
+                ["توصیه بقا:", p.survivalTips]
+            ];
         const infoHtml = (p.infoRows
             ? p.infoRows.map(row => createInfoRow(row.label, row.value, row.danger))
             : defaultInfoRows.map(([label, value, danger]) => createInfoRow(label, value, danger))
@@ -665,7 +762,7 @@ const profiles = {
         const menus = document.querySelectorAll(".submenu");
 
         items.forEach(item => {
-            const originalText = item.getAttribute("data-original-text");
+            const originalText = item.getAttribute("data-current-text") || item.getAttribute("data-original-text");
             if (query === "") {
                 item.innerHTML = originalText;
                 item.style.display = "block";
@@ -684,16 +781,25 @@ const profiles = {
         });
     }
 
-    updateArchiveStats();
-    updateSystemClock();
+    let savedLanguage = "fa";
+    try {
+        savedLanguage = localStorage.getItem("umbrella-language") === "en" ? "en" : "fa";
+    } catch (error) {
+        savedLanguage = "fa";
+    }
+    setLanguage(savedLanguage);
     setInterval(updateSystemClock, 1000);
 
-    function showContact() {
-        cancelTyping();
-        document.getElementById("display-area").innerHTML = `
-            <h1 class="glitch-title" data-text="ارتباط با سازنده" style="color: var(--main-red);">ارتباط با سازنده</h1>
-            <p>روبیکا: @Umbrella_Survivor</p>
-            <p>لطفا انتقادات و پیشنهادات خود را به آیدی بنده در روبیکا پیام دهید.</p>
-            <p>برای اطلاع‌رسانی درباره سایت، در این کانال عضو شوید: <strong>@umbrella_data_center</strong></p>
-        `;
-    }
+   function showContact() {
+       cancelTyping();
+        currentView = "contact";
+        const text = window.uiTranslations[activeLanguage];
+        const title = text.contactPageTitle;
+        document.getElementById("display-area").innerHTML =
+            '<h1 class="glitch-title" data-text="' + title + '" style="color: var(--main-red);">' + title + '</h1>' +
+            '<p>Rubika: @Umbrella_Survivor</p>' +
+            '<p>' + text.contactPageText + '</p>' +
+            '<p>' + text.contactPageChannel + ' <strong>@umbrella_data_center</strong></p>';
+        const heading = document.querySelector("#display-area .glitch-title");
+        if (heading) heading.dataset.text = heading.textContent;
+   }

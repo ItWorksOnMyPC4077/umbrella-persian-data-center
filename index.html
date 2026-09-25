@@ -19,16 +19,21 @@
         <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div class="language-switcher" role="group" aria-label="Language selector">
+        <button type="button" data-language-button="fa" onclick="setLanguage('fa')">FA</button>
+        <button type="button" data-language-button="en" onclick="setLanguage('en')">EN</button>
+    </div>
+
 <!-- دکمه شناور -->
     <button id="contact-float-btn" onclick="document.getElementById('contact-modal').style.display='flex'">📞</button>
 
     <!-- مودال تماس -->
     <div id="contact-modal" onclick="if(event.target==this) this.style.display='none'">
         <div class="modal-content">
-            <h2 style="color: var(--main-red);">ارتباط با مرکز داده</h2>
-            <p>روبیکا: @Umbrella_Survivor</p>
-            <p>کانال اصلی: @umbrella_data_center</p>
-            <button onclick="document.getElementById('contact-modal').style.display='none'" style="background:var(--main-red); color:white; border:none; padding:10px 20px; cursor:pointer;">بستن</button>
+            <h2 data-i18n="contactTitle" style="color: var(--main-red);">ارتباط با مرکز داده</h2>
+            <p><span data-i18n="rubikaLabel">روبیکا:</span> @Umbrella_Survivor</p>
+            <p><span data-i18n="channelLabel">کانال اصلی:</span> @umbrella_data_center</p>
+            <button data-i18n="close" onclick="document.getElementById('contact-modal').style.display='none'" style="background:var(--main-red); color:white; border:none; padding:10px 20px; cursor:pointer;">بستن</button>
         </div>
     </div>
 
@@ -41,24 +46,24 @@
     <div id="access-granted-screen" aria-live="polite" aria-hidden="true">
         <div id="access-terminal" class="access-terminal">
             <div class="access-terminal-header">
-                <span>UMBRELLA // SECURE TERMINAL</span>
-                <span class="terminal-status">● ONLINE</span>
+                <span data-i18n="terminalTitle">UMBRELLA // SECURE TERMINAL</span>
+                <span class="terminal-status" data-i18n="terminalOnline">● ONLINE</span>
             </div>
             <div id="access-terminal-log" class="access-terminal-log"></div>
         </div>
         <div id="access-confirmation" class="access-confirmation" aria-hidden="true">
             <img src="images/Umbrella_Corporation_logo.svg.webp" alt="Umbrella Corporation">
-            <p>دسترسی داده شد</p>
+            <p data-i18n="accessGranted">دسترسی داده شد</p>
         </div>
     </div>
 
     <div id="login-screen">
         <div class="login-box">
             <img src="images/image.png" alt="Logo" style="width:100px; margin-bottom:15px;">
-            <h2 style="color:white">ACCESS REQUIRED</h2>
-            <p style="color: #ccc; margin: 8px 0 12px;">رمز ورود: umbrella</p>
-            <input type="password" id="access-key" placeholder="PASSCODE" onkeydown="if(event.key==='Enter') checkAccess()">
-            <button onclick="checkAccess()">ENTRY</button>
+            <h2 data-i18n="loginTitle" style="color:white">ACCESS REQUIRED</h2>
+            <p data-i18n="loginHint" style="color: #ccc; margin: 8px 0 12px;">رمز ورود: umbrella</p>
+            <input type="password" id="access-key" data-i18n-placeholder="passwordPlaceholder" placeholder="PASSCODE" onkeydown="if(event.key==='Enter') checkAccess()">
+            <button data-i18n="loginButton" onclick="checkAccess()">ENTRY</button>
             <div id="login-error" style="color:red; margin-top:10px;"></div>
         </div>
     </div>
@@ -67,14 +72,14 @@
         <div id="sidebar">
             <div class="brand">
                 <img src="images/umbrella.png" alt="Umbrella">
-                <div style="color:white; font-weight:bold; letter-spacing:2px;">امبرلا</div>
+                <div data-i18n="brandName" style="color:white; font-weight:bold; letter-spacing:2px;">امبرلا</div>
             </div>
 
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="جستجو در آرشیو..." oninput="filterProfiles()">
+                <input type="text" id="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="جستجو در آرشیو..." oninput="filterProfiles()">
             </div>
 
-            <div class="nav-btn" onclick="toggleMenu('m1')">📁 موجودات بیولوژیکی</div>
+            <div class="nav-btn" data-i18n="bioCategory" onclick="toggleMenu('m1')">📁 موجودات بیولوژیکی</div>
             <div id="m1" class="submenu">
                 <div class="sub-item" data-original-text="نمسیس (Nemesis)" onclick="loadProfile('نمسیس')">نمسیس (Nemesis)</div>
                 <div class="sub-item" data-original-text="لیکر (Licker)" onclick="loadProfile('لیکر')">لیکر (Licker)</div>
@@ -84,7 +89,7 @@
                 <div class="sub-item" data-original-text="سگ زامبی (Zombie Dog)" onclick="loadProfile('سگ زامبی')">سگ زامبی (Zombie Dog)</div>
             </div>
 
-            <div class="nav-btn" onclick="toggleMenu('m2')">👤 پرسنل و سوژه‌ها</div>
+            <div class="nav-btn" data-i18n="personnelCategory" onclick="toggleMenu('m2')">👤 پرسنل و سوژه‌ها</div>
             <div id="m2" class="submenu">
                 <div class="sub-item" data-original-text="لئون اس. کندی" onclick="loadProfile('لئون')">لئون اس. کندی</div>
                 <div class="sub-item" data-original-text="آلبرت وسکر" onclick="loadProfile('وسکر')">آلبرت وسکر</div>
@@ -101,41 +106,42 @@
                 <div class="sub-item" data-original-text="کارلوس اولیویرا (Carlos Oliveira)" onclick="loadProfile('کارلوس')">کارلوس اولیویرا (Carlos Oliveira)</div>
             </div>
 
-            <div class="nav-btn" onclick="toggleMenu('m3')">🧬 پروژه‌های تحقیقاتی</div>
+            <div class="nav-btn" data-i18n="projectsCategory" onclick="toggleMenu('m3')">🧬 پروژه‌های تحقیقاتی</div>
             <div id="m3" class="submenu">
                 <div class="sub-item" data-original-text="NE-α Project" onclick="loadProfile('nea')">NE-α Project</div>
                 <div class="sub-item" data-original-text="ویروس لاس پلاگاس (Las Plagas)" onclick="loadProfile('لاس پلاگاس')">ویروس لاس پلاگاس (Las Plagas)</div>
             </div>
 
-            <div class="nav-btn" onclick="toggleMenu('m4')">📍 مکان‌های آلوده</div>
+            <div class="nav-btn" data-i18n="locationsCategory" onclick="toggleMenu('m4')">📍 مکان‌های آلوده</div>
             <div id="m4" class="submenu">
                 <div class="sub-item" data-original-text="عمارت اسپنسر (Spencer Mansion)" onclick="loadProfile('عمارت اسپنسر')">عمارت اسپنسر (Spencer Mansion)</div>
             </div>
-            <div class="nav-btn" onclick="showContact()">📞 ارتباط با سازنده</div>
+            <div class="nav-btn" data-i18n="contactNav" onclick="showContact()">📞 ارتباط با سازنده</div>
         </div>
 
 
         <div id="main-content">
             <div class="system-status" role="status" aria-label="وضعیت سامانه">
-                <span class="system-status-item"><i class="status-light"></i> سرور مرکزی: آنلاین</span>
-                <span class="system-status-item">سطح هشدار: <strong>قرمز</strong></span>
+                <span class="system-status-item"><i class="status-light"></i><span data-i18n="serverOnline"> سرور مرکزی: آنلاین</span></span>
+                <span class="system-status-item"><span data-i18n="alertLabel">سطح هشدار:</span> <strong data-i18n="alertLevel">قرمز</strong></span>
                 <span id="database-clock" class="system-status-item">ساعت سامانه: --:--:--</span>
             </div>
             <div id="display-area">
                 <section class="welcome-panel">
                     <p class="welcome-kicker">UMBRELLA // CLASSIFIED DATABASE</p>
-                    <h1 class="glitch-title" data-text="سیستم مرکزی آمبرلا">سیستم مرکزی آمبرلا</h1>
-                    <p class="welcome-copy">دسترسی محدود برقرار است. پرونده‌های طبقه‌بندی‌شدهٔ زیستی، پرسنل، پروژه‌ها و مکان‌های آلوده را از آرشیو انتخاب کنید.</p>
+                    <h1 class="glitch-title" data-i18n="welcomeTitle" data-text="سیستم مرکزی آمبرلا">سیستم مرکزی آمبرلا</h1>
+                    <p class="welcome-copy" data-i18n="welcomeCopy">دسترسی محدود برقرار است. پرونده‌های طبقه‌بندی‌شدهٔ زیستی، پرسنل، پروژه‌ها و مکان‌های آلوده را از آرشیو انتخاب کنید.</p>
                     <div class="archive-stats" aria-label="آمار آرشیو">
-                        <article class="archive-stat"><strong id="stat-bio">۰</strong><span>موجود بیولوژیکی</span></article>
-                        <article class="archive-stat"><strong id="stat-personnel">۰</strong><span>پرسنل و سوژه</span></article>
-                        <article class="archive-stat"><strong id="stat-projects">۰</strong><span>پروژه تحقیقاتی</span></article>
-                        <article class="archive-stat"><strong id="stat-locations">۰</strong><span>مکان آلوده</span></article>
+                        <article class="archive-stat"><strong id="stat-bio">۰</strong><span data-i18n="bioStat">موجود بیولوژیکی</span></article>
+                        <article class="archive-stat"><strong id="stat-personnel">۰</strong><span data-i18n="personnelStat">پرسنل و سوژه</span></article>
+                        <article class="archive-stat"><strong id="stat-projects">۰</strong><span data-i18n="projectsStat">پروژه تحقیقاتی</span></article>
+                        <article class="archive-stat"><strong id="stat-locations">۰</strong><span data-i18n="locationsStat">مکان آلوده</span></article>
                     </div>
                 </section>
             </div>
         </div>
     </div>
+    <script src="js/translations.js" defer></script>
     <script src="js/app.js" defer></script>
 </body>
 </html>

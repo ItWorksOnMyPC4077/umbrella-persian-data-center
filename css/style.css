@@ -704,3 +704,107 @@ body.modal-open {
         padding: 20px 16px;
     }
 }
+
+.language-switcher {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 4000;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid var(--main-red);
+    border-radius: 7px;
+    background: #090909;
+    box-shadow: 0 0 14px rgba(217, 4, 41, 0.28);
+    direction: ltr;
+}
+
+.language-switcher button {
+    min-width: 42px;
+    padding: 8px 10px;
+    border: 0;
+    border-left: 1px solid rgba(217, 4, 41, 0.45);
+    background: transparent;
+    color: #c7c7c7;
+    font: 700 0.76rem/1 "Segoe UI", sans-serif;
+    cursor: pointer;
+}
+
+.language-switcher button:last-child {
+    border-left: 0;
+}
+
+.language-switcher button.is-active,
+.language-switcher button:hover {
+    background: var(--main-red);
+    color: #fff;
+}
+
+html[dir="ltr"] #sidebar {
+    border-left: none;
+    border-right: 2px solid var(--main-red);
+}
+
+html[dir="ltr"] .id-card,
+html[dir="ltr"] .welcome-panel {
+    border-right: 1px solid rgba(217, 4, 41, 0.55);
+    border-left: 5px solid var(--main-red);
+}
+
+html[dir="ltr"] .id-details,
+html[dir="ltr"] .bio-text,
+html[dir="ltr"] .sub-item,
+html[dir="ltr"] .search-box input {
+    text-align: left;
+}
+
+html[dir="ltr"] .info-label {
+    margin-left: 0;
+    margin-right: 5px;
+}
+
+html[dir="ltr"] .welcome-kicker {
+    text-align: left;
+}
+
+html[dir="ltr"] .access-terminal {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .access-terminal-line::before {
+    direction: ltr;
+}
+
+html[dir="ltr"] #contact-float-btn {
+    right: auto;
+    left: 30px;
+}
+
+html[dir="ltr"] .image-modal-close {
+    right: 18px;
+    left: auto;
+}
+
+@media (max-width: 900px) {
+    html[dir="ltr"] #sidebar {
+        border-right: none;
+        border-bottom: 2px solid var(--main-red);
+    }
+
+    html[dir="ltr"] #contact-float-btn {
+        left: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .language-switcher {
+        top: 10px;
+        left: 10px;
+    }
+
+    html[dir="ltr"] .image-modal-close {
+        top: 10px;
+        right: 10px;
+    }
+}
